@@ -1,0 +1,18 @@
+<html>
+<head>hi</head>
+<body>He</body>
+<script>
+  const data = { 
+    title: 'jason' 
+  };
+
+  fetch('http://localhost:8080/books/1', {
+    method: 'PUT', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+</script>
+</html>
