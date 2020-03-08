@@ -4,10 +4,12 @@ import com.isu.rest.model.Book;
 import com.isu.rest.model.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,27 +28,14 @@ public class BookController {
     @Autowired
     PageRepository pageRepository;
 
-    @GetMapping("/test")
-    public String test() {
-        restTemplate.put
-        return "";
-    }
+//    @GetMapping("/test")
+//    public ResponseEntity test() {
+//
+//    }
 
     @GetMapping
     public List<Book> getAll(@RequestParam(required = false) String title) {
-        List<Book> books = new ArrayList<>();
-            books = bookRepository.findAll();
-            List<Page> pages = pageRepository.findAll();
-        if(title == null) {
-
-        } else {
-//            Optional<Book> b = bookRepository.findByTitle(title);
-//            books.add(b.orElse(null));
-//            Book b = bookRepository.findOneByTitle(title);
-//            books.add(b);
-            List<Book> b = bookRepository.findOneByTitle(title);
-            books.addAll(b);
-        }
+        List<Book> books = bookRepository.findAll();
         return books;
     }
 
