@@ -44,11 +44,11 @@ public class BookController {
     }
 
     @PostMapping()
-    public void postBook(@RequestBody Book book) throws Exception {
+    public Book postBook(@RequestBody Book book) throws Exception {
         if(StringUtils.isEmpty(book.getTitle())) {
             throw new Exception("실패함");
         }
-        bookRepository.save(book);
+        return bookRepository.save(book);
     }
 
     @PutMapping("/{id}")
