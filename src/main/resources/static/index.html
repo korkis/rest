@@ -1,18 +1,41 @@
 <html>
 <head>hi</head>
-<body>He</body>
-<script>
-  const data = { 
-    title: 'jason' 
-  };
+<body>
+  
+  <button onclick="click1()">Click!</button>
 
-  fetch('http://localhost:8080/books/1', {
-    method: 'PUT', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script>
+    function click1() {
+      const data = { 
+        title2: 'jason' 
+      };
 
-</script>
+      $.ajax({
+        url: "/books",
+        type: "post",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data)
+      }).done(function() {
+        alert('회원정보를 수정 하였습니다.');
+      }).fail(function(xhr, status, errorThrown) {
+        alert('회원정보를 수정에 실패 하였습니다.');
+      })
+    }
+  
+    // fetch('http://localhost:8080/books/1', {
+    //   method: 'PUT', // or 'PUT'
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+  
+  </script>
+
+</body>
 </html>

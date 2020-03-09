@@ -1,4 +1,4 @@
-package com.isu.rest;
+package com.isu.rest.repository;
 
 import com.isu.rest.model.Book;
 import com.isu.rest.model.Page;
