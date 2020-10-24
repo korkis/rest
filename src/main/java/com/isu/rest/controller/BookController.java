@@ -60,10 +60,14 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public void putBook(@PathVariable Long id, @RequestBody Book book) throws Exception {
-        throw new Exception("POST ERROR");
+    public void putBook(@PathVariable Long id, @RequestBody Book newBook) throws Exception {
 //        book.setId(id);
 //        bookRepository.save(book);
+        Book book = bookRepository.findById(id).get();
+        book.setTitle(newBook.getTitle());
+        book.getPages().remove(0);
+//        book.getPages().removeAll(book.getPages());
+        bookRepository.save(book);
     }
 
     @GetMapping("/pages")
