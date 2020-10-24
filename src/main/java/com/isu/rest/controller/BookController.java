@@ -32,9 +32,14 @@ public class BookController {
 //    }
 
     @GetMapping
-    public List<Book> getAll(@RequestParam(required = false) String title) {
-        List<Book> books = bookRepository.findAll();
-        return books;
+    public List<Book> getAll(@RequestParam(required = false) String title,
+                             @RequestParam(required = false) Integer pageNumber) {
+        return bookRepository.findByCustom();
+//        if(pageNumber != null) {
+//            return bookRepository.findByPageNumber(pageNumber);
+//        }
+//        List<Book> books = bookRepository.findAll();
+//        return books;
     }
 
     @GetMapping("/{id}")
@@ -44,11 +49,14 @@ public class BookController {
     }
 
     @PostMapping()
-    public Book postBook(@RequestBody Book book) throws Exception {
-        if(StringUtils.isEmpty(book.getTitle())) {
-            throw new Exception("실패함");
-        }
-        return bookRepository.save(book);
+    public Book postBook(String title, String name) throws Exception {
+//        if(StringUtils.isEmpty(book.getTitle())) {
+//            throw new Exception("실패함");
+//        }
+
+        Book b = new Book();
+        b.setTitle(title);
+        return bookRepository.save(b);
     }
 
     @PutMapping("/{id}")
