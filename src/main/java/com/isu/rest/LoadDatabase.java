@@ -22,14 +22,14 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase() {
         return args -> {
-            Book book = new Book(null, "Home", null);
-            bookRepository.save(book);
-            Book book2 = new Book(null, "Home", null);
-            bookRepository.save(book2);
+            Book homeBook = new Book(null, "Home", null);
+            bookRepository.save(homeBook);
+            Book SpecialBook = new Book(null, "Special", null);
+            bookRepository.save(SpecialBook);
 
-            Page page = new Page(null, 1, book);
+            Page page = new Page(null, 1, homeBook);
             pageRepository.save(page);
-            pageRepository.save(new Page(null, 2, book));
+            pageRepository.save(new Page(null, 2, homeBook));
         };
     }
 }
