@@ -9,6 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.transaction.Transactional;
+
 @Configuration
 @Slf4j
 public class LoadDatabase {
@@ -27,8 +29,7 @@ public class LoadDatabase {
             Book SpecialBook = new Book(null, "Special", null);
             bookRepository.save(SpecialBook);
 
-            Page page = new Page(null, 1, homeBook);
-            pageRepository.save(page);
+            pageRepository.save(new Page(null, 1, homeBook));
             pageRepository.save(new Page(null, 2, homeBook));
         };
     }

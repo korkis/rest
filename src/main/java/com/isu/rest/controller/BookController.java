@@ -4,12 +4,18 @@ import com.isu.rest.repository.BookRepository;
 import com.isu.rest.repository.PageRepository;
 import com.isu.rest.model.Book;
 import com.isu.rest.model.Page;
+import com.isu.rest.service.BookService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -26,6 +32,9 @@ public class BookController {
     @Autowired
     PageRepository pageRepository;
 
+    @Autowired
+    BookService bookService;
+
 //    @GetMapping("/test")
 //    public ResponseEntity test() {
 //
@@ -35,6 +44,7 @@ public class BookController {
     public List<Book> getAll(@RequestParam(required = false) String title,
                              @RequestParam(required = false) Integer pageNumber) {
         return bookRepository.findByCustom();
+//        return bookRepository.findByTitle(title);
 //        if(pageNumber != null) {
 //            return bookRepository.findByPageNumber(pageNumber);
 //        }
@@ -44,30 +54,31 @@ public class BookController {
 
     @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
-        Book book = bookRepository.findById(id).orElse(null);
+        Book book = bookService.saveBookById(id);
         return book;
     }
 
     @PostMapping()
-    public Book postBook(String title, String name) throws Exception {
+    public Book postBook(@RequestBody Book book) throws Exception {
 //        if(StringUtils.isEmpty(book.getTitle())) {
 //            throw new Exception("실패함");
 //        }
 
-        Book b = new Book();
-        b.setTitle(title);
-        return bookRepository.save(b);
+        return bookService.save(book);
     }
 
     @PutMapping("/{id}")
     public void putBook(@PathVariable Long id, @RequestBody Book newBook) throws Exception {
 //        book.setId(id);
 //        bookRepository.save(book);
-        Book book = bookRepository.findById(id).get();
-        book.setTitle(newBook.getTitle());
-        book.getPages().remove(0);
+//        Book book = bookRepository.findById(id).get();
+//        book.setTitle(newBook.getTitle());
+//        book.getPages().remove(0);
 //        book.getPages().removeAll(book.getPages());
-        bookRepository.save(book);
+//        newBook.getPages().get(0).setBook(newBook);
+//        bookRepository.save(book);
+        newBook.setId(id);
+        bookService.save(newBook);
     }
 
     @GetMapping("/pages")
