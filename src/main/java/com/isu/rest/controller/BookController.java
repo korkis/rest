@@ -6,16 +6,10 @@ import com.isu.rest.model.Book;
 import com.isu.rest.model.Page;
 import com.isu.rest.service.BookService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.transaction.Transactional;
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -43,7 +37,8 @@ public class BookController {
     @GetMapping
     public List<Book> getAll(@RequestParam(required = false) String title,
                              @RequestParam(required = false) Integer pageNumber) {
-        return bookRepository.findByCustom();
+//        return bookRepository.findByCustom();
+        return bookRepository.findAll();
 //        return bookRepository.findByTitle(title);
 //        if(pageNumber != null) {
 //            return bookRepository.findByPageNumber(pageNumber);
@@ -52,9 +47,21 @@ public class BookController {
 //        return books;
     }
 
+    @GetMapping("/testOneLazy")
+    public boolean testOneBookLazy() {
+        bookService.testOneBookLazy();
+        return true;
+    }
+
+    @GetMapping("/testMultipleLazy")
+    public boolean testMultipleLazy() {
+        bookService.testMultipleBookLazy();
+        return true;
+    }
+
     @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
-        Book book = bookService.saveBookById(id);
+        Book book = bookService.findById(id);
         return book;
     }
 
@@ -63,7 +70,6 @@ public class BookController {
 //        if(StringUtils.isEmpty(book.getTitle())) {
 //            throw new Exception("실패함");
 //        }
-
         return bookService.save(book);
     }
 

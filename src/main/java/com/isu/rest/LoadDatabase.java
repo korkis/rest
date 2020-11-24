@@ -26,7 +26,7 @@ public class LoadDatabase {
         return args -> {
             Book homeBook = new Book(null, "Home", null);
             bookRepository.save(homeBook);
-            Book SpecialBook = new Book(null, "Special", null);
+            Book SpecialBook = new Book(null, "Home", null);
             bookRepository.save(SpecialBook);
 
             pageRepository.save(new Page(null, 1, homeBook));

@@ -20,7 +20,7 @@ public class Book {
 
     private String title;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
 //    @JsonIgnore
     private List<Page> pages;
 

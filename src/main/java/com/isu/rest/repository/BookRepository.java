@@ -11,7 +11,7 @@ public interface BookRepository extends JpaRepository<Book, Long>, CustomizedBoo
 
     Optional<Book> findOneById(Long id);
 
-    Book findByTitle(String title);
+    List<Book> findByTitle(String title);
 
     @Query(value = "select a,b from Book a inner join a.pages b where b.number = ?1")
     List<Book> findByPageNumber(Integer number);
