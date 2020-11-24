@@ -40,10 +40,9 @@ public class BookService {
 
     public Book findById(Long id) {
         Book book = bookRepository.findById(id).orElse(null);
-        System.out.println(book.getPages().get(0).getNumber());
-        System.out.println(book.getPages().get(1).getNumber());
-//        return book;
-        return new Book();
+//        System.out.println(book.getPages().get(0).getNumber());
+//        System.out.println(book.getPages().get(1).getNumber());
+        return book;
     }
 
     public void testOneBookLazy() {
