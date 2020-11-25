@@ -53,19 +53,22 @@ public class BookService {
         System.out.println("bookTitle:" + book.getTitle());
         System.out.println("Title조회 완료");
         System.out.println("Page조회 전");
+        List<Page> pages = book.getPages();
         System.out.println("Page Size:" + book.getPages().size());
         System.out.println("Page조회 완료");
         System.out.println("Page 루프 시작");
-        for(Page p : book.getPages()) {
-            System.out.println("Page " + p.getNumber());
-        }
+//        for(Page p : book.getPages()) {
+//            System.out.println("Page " + p.getNumber());
+//        }
         System.out.println("Page 루프 끝");
     }
 
     public void testMultipleBookLazy() {
         List<Book> books = bookRepository.findByTitle("Home");
         for(Book book : books) {
-            System.out.println(book.getPages().size());
+            for(Page page : book.getPages()) {
+                System.out.println("book:" + book.getId() + ", page:" + page.getId());
+            }
         }
     }
 }
