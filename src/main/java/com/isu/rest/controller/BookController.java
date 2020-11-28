@@ -47,22 +47,35 @@ public class BookController {
 //        return books;
     }
 
-    @GetMapping("/testOneLazy")
+    @GetMapping("/testOne")
     public boolean testOneBookLazy() {
         bookService.testOneBookLazy();
         return true;
     }
 
-    @GetMapping("/testMultipleLazy")
+    @GetMapping("/testMultiple")
     public boolean testMultipleLazy() {
         bookService.testMultipleBookLazy();
         return true;
     }
 
+    @GetMapping("/testTran")
+    public boolean testTran() {
+        try {
+            bookService.saveWithTransactional(true);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
     @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
         Book book = bookService.findById(id);
-        System.out.println(book.getPages().size());
+        book.getPages().forEach((x) -> {
+            System.out.println(x.getNumber());
+        });
         return book;
     }
 

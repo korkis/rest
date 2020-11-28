@@ -1,6 +1,8 @@
 package com.isu.rest.repository;
 
 import com.isu.rest.model.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,7 +13,12 @@ public interface BookRepository extends JpaRepository<Book, Long>, CustomizedBoo
 
     Optional<Book> findOneById(Long id);
 
-    @Query(value = "select a from Book a join fetch a.pages where a.title = ?1")
+//    @Query(value = "select a from Book a left join fetch a.pages")
+//    List<Book> findAll();
+
+//    @Query(value = "select a from Book a left join fetch a.pages where a.title = ?1")
+//    @Query(value = "select * from Book a inner join Page b on a.id = b.book_id where a.title = ?1", nativeQuery = true)
+//    @EntityGraph(attributePaths = {"pages"}, type = EntityGraph.EntityGraphType.LOAD)
     List<Book> findByTitle(String title);
 
     @Query(value = "select a,b from Book a inner join a.pages b where b.number = ?1")

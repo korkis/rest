@@ -31,6 +31,8 @@ public class LoadDatabase {
 
             pageRepository.save(new Page(null, 1, homeBook));
             pageRepository.save(new Page(null, 2, homeBook));
+            log.debug("초기화");
+
         };
     }
 }
