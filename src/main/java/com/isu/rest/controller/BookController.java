@@ -73,9 +73,9 @@ public class BookController {
     @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
         Book book = bookService.findById(id);
-        book.getPages().forEach((x) -> {
-            System.out.println(x.getNumber());
-        });
+//        book.getPages().forEach((x) -> {
+//            System.out.println(x.getNumber());
+//        });
         return book;
     }
 

@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.EntityGraph;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +29,12 @@ public class Book {
 
 //    @BatchSize(size = 2)
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-//    @JsonIgnore
-    private List<Page> pages;
+    @JsonIgnore
+    private List<Page> pages = new ArrayList<>();
+//    private Set<Page> pages = new HashSet<>();
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    private List<Bookmark> bookmarks = new ArrayList<>();
+//    private Set<Bookmark> bookmarks = new HashSet<>();
 
 }

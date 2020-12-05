@@ -13,8 +13,9 @@ public interface BookRepository extends JpaRepository<Book, Long>, CustomizedBoo
 
     Optional<Book> findOneById(Long id);
 
-//    @Query(value = "select a from Book a left join fetch a.pages")
-//    List<Book> findAll();
+    @Query(value = "select a from Book a left outer join fetch a.bookmarks")
+//    @EntityGraph(attributePaths = {"bookmarks"})
+    List<Book> findAll();
 
 //    @Query(value = "select a from Book a left join fetch a.pages where a.title = ?1")
 //    @Query(value = "select * from Book a inner join Page b on a.id = b.book_id where a.title = ?1", nativeQuery = true)
