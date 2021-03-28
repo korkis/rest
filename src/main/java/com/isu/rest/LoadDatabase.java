@@ -2,6 +2,7 @@ package com.isu.rest;
 
 import com.isu.rest.model.*;
 import com.isu.rest.repository.BookRepository;
+import com.isu.rest.repository.BookmarkRepository;
 import com.isu.rest.repository.PageRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +22,22 @@ public class LoadDatabase {
     @Autowired
     PageRepository pageRepository;
 
+    @Autowired
+    BookmarkRepository bookmarkRepository;
+
     @Bean
     CommandLineRunner initDatabase() {
         return args -> {
-            Book homeBook = new Book(null, "Home", null);
+            Book homeBook = new Book(null, "Home", null, null);
             bookRepository.save(homeBook);
-            Book SpecialBook = new Book(null, "Home", null);
+            Book SpecialBook = new Book(null, "Home", null, null);
             bookRepository.save(SpecialBook);
 
             pageRepository.save(new Page(null, 1, homeBook));
             pageRepository.save(new Page(null, 2, homeBook));
-            log.debug("초기화");
 
+            bookmarkRepository.save(new Bookmark(null, "FirstBookMark", homeBook));
+            log.debug("초기화");
         };
     }
 }
