@@ -23,4 +23,5 @@ public class HomeController {
     public String getB() {
         return "b";
     }
+
 }
