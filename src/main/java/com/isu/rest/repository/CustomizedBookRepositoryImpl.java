@@ -13,6 +13,6 @@ public class CustomizedBookRepositoryImpl implements CustomizedBookRepository {
 
     @Override
     public List<Book> findBooks() {
-        return em.createNativeQuery("select * from book", Book.class).getResultList();
+        return em.createQuery("select b from Book b").getResultList();
     }
 }

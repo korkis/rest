@@ -1,10 +1,13 @@
 package com.isu.rest.controller;
 
+//import com.isu.rest.model.QBook;
+import com.isu.rest.model.QBook;
 import com.isu.rest.repository.BookRepository;
 import com.isu.rest.repository.PageRepository;
 import com.isu.rest.model.Book;
 import com.isu.rest.model.Page;
 import com.isu.rest.service.BookService;
+import com.querydsl.core.types.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -112,5 +115,25 @@ public class BookController {
     @GetMapping("/findbooks")
     public List<Book> getBooks() throws Exception {
         return bookRepository.findBooks();
+    }
+
+    @GetMapping("/query")
+    public Iterable<Book> findbooksByQueryDsl() throws Exception {
+        QBook qBook = QBook.book;
+//        JPAQuery<?> query = new JPAQuery<Void>(entityManager);
+//        Customer bob = query.select(customer)
+//                .from(customer)
+//                .where(customer.firstName.eq("Bob"))
+//                .fetchOne();
+
+
+        Predicate predicate = qBook.title.notEqualsIgnoreCase("dave");
+//                .and(user.lastname.startsWithIgnoreCase("mathews"));
+
+        return bookRepository.findAll(predicate);
+//        Predicate predicate = user.firstname.equalsIgnoreCase("dave")
+//                .and(user.lastname.startsWithIgnoreCase("mathews"));
+//
+//        userRepository.findAll(predicate);
     }
 }
