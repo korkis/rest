@@ -65,4 +65,9 @@ public class BookController {
 //        System.out.println(pages.get(0).getBook().getTitle());
 //        return pages;
     }
+
+    @GetMapping("/findbooks")
+    public List<Book> getBooks() throws Exception {
+        return bookRepository.findBooks();
+    }
 }
