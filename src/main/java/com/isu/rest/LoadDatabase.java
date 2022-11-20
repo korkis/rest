@@ -28,9 +28,11 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase() {
         return args -> {
-            Book homeBook = new Book(null, "Home", null, null);
+            Book homeBook = new Book(null, "Home", null, null, null, null);
+//            Book homeBook = new Book(null, "Home", null, null, null, null);
             bookRepository.save(homeBook);
-            Book SpecialBook = new Book(null, "Home", null, null);
+            Book SpecialBook = new Book(null, "Home", null, null, null, null);
+//            Book SpecialBook = new Book(null, "Home", null, null, null, null);
             bookRepository.save(SpecialBook);
 
             pageRepository.save(new Page(null, 1, homeBook));
